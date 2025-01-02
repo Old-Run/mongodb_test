@@ -1,0 +1,25 @@
+version: '3'
+services:
+  python-dev:
+    image: python-dev
+    container_name: python-dev
+    volumes:
+      - ./python_dev:/python_dev
+    networks:
+      - dev-network
+    # depends_on:
+    #   - dev-mongo
+    # command: ['python3', 'e04.py']
+    command: ['tail', '-f', '/dev/null']
+  dev-mongo:
+    image: mongo:4.4
+    container_name: dev-mongo
+    volumes:
+      - ./db/mongo:/data/db
+    ports:
+      - 27017:27017
+    networks:
+      - dev-network
+
+networks:
+  dev-network:
